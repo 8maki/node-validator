@@ -697,6 +697,32 @@
         return this;
     }
 
+    //commited by 8maki
+    Validator.prototype.max = function(max) {
+      var value;
+      try {
+        value = Number(this.str);
+      } catch(e) {
+        this.error(this.msg || 'the value is not number');
+      }
+      if (value > max) {
+        this.error(this.msg || 'the value is more than max');
+      }
+      return this;
+    };
+    Validator.prototype.min = function(min) {
+      var value;
+      try {
+        value = Number(this.str);
+      } catch(e) {
+        this.error(this.msg || 'the value is not number');
+      }
+      if (value < min) {
+        this.error(this.msg || 'the value is more than max');
+      }
+      return this;
+    };
+
     var Filter = exports.Filter = function() {}
 
     var whitespace = '\\r\\n\\t\\s';
@@ -771,6 +797,18 @@
         }
         return this.str;
     }
+
+    Filter.prototype.convertShort = function() {
+      var str = this.str;
+      if (str.match(/T$/)) {
+        this.modify(Number(str.replace('T', '')) * 1000000000000);
+      } else if (str.match(/B$/)) {
+        this.modify(Number(str.replace('B', '')) * 1000000000);
+      } else if (str.match(/M$/)) {
+        this.modify(Number(str.replace('M', '')) * 1000000);
+      }
+      return this.str;
+    };
 
     //String must be equal to '1' or 'true' to be considered true, all other strings
     //are false
