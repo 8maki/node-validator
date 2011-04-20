@@ -697,32 +697,6 @@
         return this;
     }
 
-    //commited by 8maki
-    Validator.prototype.max = function(max) {
-      var value;
-      try {
-        value = Number(this.str);
-      } catch(e) {
-        this.error(this.msg || 'the value is not number');
-      }
-      if (value > max) {
-        this.error(this.msg || 'the value is more than max');
-      }
-      return this;
-    };
-    Validator.prototype.min = function(min) {
-      var value;
-      try {
-        value = Number(this.str);
-      } catch(e) {
-        this.error(this.msg || 'the value is not number');
-      }
-      if (value < min) {
-        this.error(this.msg || 'the value is more than max');
-      }
-      return this;
-    };
-
     var Filter = exports.Filter = function() {}
 
     var whitespace = '\\r\\n\\t\\s';
